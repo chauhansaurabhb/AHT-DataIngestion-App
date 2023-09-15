@@ -1,0 +1,73 @@
+openapi: 3.0.3
+info:
+  title: AHT Data Ingestion - OpenAPI 3.0
+  description: |-
+    A REST service for managing telemetry (instrument measurement) data
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/api
+tags:
+  - name: telemetry
+    description: Operations about instrument data
+paths:
+  /telemetry:
+    post:
+      tags:
+        - telemetry
+      summary: Store instrument data
+      description: Store an instrument measurement data
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MeasurementRequestData'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeasurementResponseData'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Resource Not Found
+        '500':
+          description: Internal Server Error
+components:
+  schemas:
+    MeasurementRequestData:
+      required:
+        - sensorId
+        - temperature
+      type: object
+      properties:
+        sensorId:
+          type: string
+          example: "A111"
+        temperature:
+          type: number
+          format: double
+          example: 25.8
+        createdAt:
+          type: string
+          format: date-time
+    MeasurementResponseData:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        sensorId:
+          type: string
+          example: "A111"
+        temperature:
+          type: number
+          format: double
+          example: 25.8
+        createdAt:
+          type: string
+          format: date-time
