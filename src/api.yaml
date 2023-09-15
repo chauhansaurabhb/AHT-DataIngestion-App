@@ -12,6 +12,8 @@ tags:
 paths:
   /telemetry:
     post:
+      security:
+        - bearerAuth: []
       tags:
         - telemetry
       summary: Store instrument data
@@ -37,6 +39,11 @@ paths:
         '500':
           description: Internal Server Error
 components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT 
   schemas:
     MeasurementRequestData:
       required:
