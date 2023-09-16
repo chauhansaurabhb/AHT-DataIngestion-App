@@ -10,7 +10,7 @@ The express typescript app conatins implementation of the POST api/telemetry end
 
 - Node.js, npm and TypeScript setup required
 - PostgreSQL should be installed (ref: https://www.postgresql.org/download/)
-- Clone the App respository from URL: https://github.com/chauhansaurabhb/AHT-DataIngestion-App
+- Clone the App respository from URL: https://github.com/chauhansaurabhb/AHT-DataIngestion-App using the command `git clone https://github.com/chauhansaurabhb/AHT-DataIngestion-App.git`
 - Specify PostgreSQL connection configuration using the `ormconfig.json` file (located in the AHT-DataIngestion-App directory)
 - Open the terminal, go to the AHT-DataIngestion-App directory and run the command `npm i` (this will install the required modules specified in the `package.json` file)
 
@@ -27,9 +27,4 @@ The express typescript app conatins implementation of the POST api/telemetry end
 **Notes on Authentication implementation:**
 - The App supports Authentication mechanism and it's implemented as a middleware layer. The JWT based authentication mechanism is integrated with the route i.e. `POST api/telemetry`.
 - For the JWT token verification, valid JWT token is generated based on the JWT secret specified in the `.env` file. 
-- For the production version, this can be exected to validate whether the provided token is valid or not (JWT token should have limited validity for the security purpose). Further based on the JWT payload, different access mechanism can be implemented to restrict the API access. For example, users with admin access rights can access all API calls and rest users can access only GET APIs.
-
-
-
-
-
+- For the production version, this can be extended to validate whether the provided token is valid or not (JWT token should have limited validity for the security purpose). Based on the JWT payload, further validation can be done by checking the payload data field in the user database (to ensure that the request is coming from the valid user) and different access mechanism can be implemented to restrict the API access. For example, users with admin access rights can access all API calls and rest users can access only GET APIs.
